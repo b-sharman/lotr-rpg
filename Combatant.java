@@ -10,6 +10,12 @@ public abstract class Combatant {
 
     public abstract void speak();
 
+    public abstract int getAttackProb();
+    public abstract int getDamage();
+    public abstract int getCriticalProb();
+    public abstract int getCriticalDamage();
+    public abstract int getShieldProb();
+
     public String getName() {
         return name;
     }
@@ -17,4 +23,5 @@ public abstract class Combatant {
     public int getHealth() {
         return health;
     }
+
 }
