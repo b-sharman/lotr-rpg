@@ -12,6 +12,8 @@ public class MiddleEarth {
     
         for (Combatant c : characters) {
             c.speak();
+            // print character stats
+            System.out.println(c);
         }
     }
 
