@@ -4,9 +4,15 @@ import java.util.Random;
 public class MiddleEarth {
 
     public static void main(String[] args) {
-        // This is where we will put our code to run our battle for Middle Earth!
-        Elf legolas = new Elf("Legolas");
-        legolas.speak();
+        ArrayList<Combatant> characters = new ArrayList<Combatant>();
+        characters.add(new Elf("Legolas"));
+        characters.add(new Man("Strider"));
+        characters.add(new GondorMan("Faramir"));
+        characters.add(new RohanMan("Éomer"));
+    
+        for (Combatant c : characters) {
+            c.speak();
+        }
     }
 
 }
