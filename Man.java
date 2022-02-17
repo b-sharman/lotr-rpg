@@ -19,6 +19,10 @@ public class Man extends Combatant {
         System.out.println(getName() + ": I am a man!");
     }
 
+    public String blockMessage(Combatant attacker) {
+        return attacker.getName() + "'s attack is blocked by " + getName() + "'s shield!";
+    }
+
     public int getAttackProb() {
         return ATTACK_PROBABILITY;
     }
