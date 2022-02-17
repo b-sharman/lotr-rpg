@@ -15,6 +15,10 @@ public class Dwarf extends Combatant {
         System.out.println(getName() + ": Let them come!");
     }
 
+    public String criticalMessage(Combatant target) {
+        return getName() + " throws an ax and scores a CRITICAL HIT on " + target.getName();
+    }
+
     public int getAttackProb() {
         return ATTACK_PROBABILITY;
     }

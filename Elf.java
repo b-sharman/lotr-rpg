@@ -15,6 +15,10 @@ public class Elf extends Combatant {
         System.out.println(getName() + ": A red moon rises!");
     }
 
+    public String criticalMessage(Combatant target) {
+        return getName() + " shoots an arrow and scores a CRITICAL HIT on " + target.getName();
+    }
+
     public int getAttackProb() {
         return ATTACK_PROBABILITY;
     }
