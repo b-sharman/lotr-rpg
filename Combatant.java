@@ -19,12 +19,12 @@ public abstract class Combatant {
     public String toString() {
 		String msg = "";
 		msg += this.name + "\n";
-		msg += "Starting Health: " + this.getHealth() + "\n";
-		msg += "Attack Prob: " + this.getAttackProb()  + "\n";
-		msg += "Attack Power: " + this.getDamage() + "\n";
-		msg += "Critical Hit Prob: " + this.getCriticalProb() + "\n";
-		msg += "Critical Hit Power: " + this.getCriticalDamage() + "\n";
-		msg += "Shield Prob: " + this.getShieldProb() + "\n";
+		msg += "Starting health: " + this.getHealth() + "\n";
+		msg += "Attack probability: " + this.getAttackProb()  + "\n";
+		msg += "Attack damage: " + this.getDamage() + "\n";
+		msg += "Critical probability: " + this.getCriticalProb() + "\n";
+		msg += "Critical damage: " + this.getCriticalDamage() + "\n";
+		msg += "Shield probability: " + this.getShieldProb() + "\n";
 		return msg;
     }
 
