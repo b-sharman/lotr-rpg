@@ -16,6 +16,9 @@ public class MiddleEarth {
             // print character stats
             System.out.println(c);
         }
+
+        ((Elf)characters.get(0)).attack(characters.get(3));
+        // ((Dwarf)characters.get(1)).attack(characters.get(3));
     }
 
 }
