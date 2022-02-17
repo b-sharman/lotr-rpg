@@ -21,4 +21,17 @@ public class MiddleEarth {
         // ((Dwarf)characters.get(1)).attack(characters.get(3));
     }
 
+    public static Combatant getRandomCombatant(ArrayList<Combatant> combatants) {
+        Random random = new Random();
+        return combatants.get(random.nextInt(combatants.size()));
+    }
+
+    public static Combatant getDefender(ArrayList<Combatant> combatants, Combatant attacker) {
+        Combatant defender = attacker;
+        while (defender == attacker) {
+            defender = getRandomCombatant(combatants);
+        }
+        return defender;
+    }
+
 }
