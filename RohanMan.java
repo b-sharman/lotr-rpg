@@ -15,4 +15,24 @@ public class RohanMan extends Man {
         System.out.println(getName() + ": I am a man of Rohan!");
     }
 
+    public int getAttackProb() {
+        return ATTACK_PROBABILITY;
+    }
+
+    public int getDamage() {
+        return DAMAGE;
+    }
+
+    public int getCriticalProb() {
+        return CRITICAL_PROBABILITY;
+    }
+
+    public int getCriticalDamage() {
+        return CRITICAL_DAMAGE;
+    }
+
+    public int getShieldProb() {
+        return SHIELD_PROBABILITY;
+    }
+
 }
