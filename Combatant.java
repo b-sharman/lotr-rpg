@@ -4,6 +4,10 @@ public abstract class Combatant {
 
     // maximum value for probabilities
     private static final int POINT_SCALE = 100;
+    // length of time it takes to resolve an attack, in ms
+    private static final int FIGHT_TIME = 1;
+    // length of time between attacks, in ms
+    private static final int PEACE_TIME = 1;
 
     private String name;
     private int health;
@@ -49,7 +53,7 @@ public abstract class Combatant {
         int roll = random.nextInt(POINT_SCALE) + 1;
         System.out.println(this.name + " is attacking " + defender.getName() + ".");
 
-        delay(2500);
+        delay(FIGHT_TIME);
 
         String msg = "";
         int damage = 0;
@@ -99,7 +103,7 @@ public abstract class Combatant {
         // subtract damage from the opponent's health
         defender.health -= damage;
 
-        delay(1200);
+        delay(PEACE_TIME);
     }
 
     public String getName() {
