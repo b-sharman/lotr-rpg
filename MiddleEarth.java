@@ -31,7 +31,7 @@ public class MiddleEarth {
             throw new Exception("not enough combatants remaining");
         }
         Combatant defender = attacker;
-        while (defender == attacker) {
+        while (defender.equals(attacker)) {
             defender = getRandomCombatant(combatants);
         }
         return defender;
