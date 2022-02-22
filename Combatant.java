@@ -51,6 +51,7 @@ public abstract class Combatant {
         Random random = new Random();
         // generate a value from 1 to POINT_SCALE, inclusive
         int roll = random.nextInt(POINT_SCALE) + 1;
+        speak();
         System.out.println(this.name + " is attacking " + defender.getName() + ".");
 
         delay(FIGHT_TIME);
