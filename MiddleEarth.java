@@ -6,22 +6,15 @@ public class MiddleEarth {
     // number of spaces in a tab - change to match environment
     public static final int TAB_LENGTH = 8;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ArrayList<Combatant> characters = new ArrayList<Combatant>();
         characters.add(new Elf("Legolas"));
         characters.add(new Dwarf("Bofur"));
         characters.add(new Man("Strider"));
         characters.add(new GondorMan("Faramir"));
         characters.add(new RohanMan("Éomer"));
-    
-        for (Combatant c : characters) {
-            c.speak();
-            // print character stats
-            System.out.println(c);
-        }
 
-        ((Elf)characters.get(0)).attack(characters.get(3));
-        // ((Dwarf)characters.get(1)).attack(characters.get(3));
+        simBattle(characters);
     }
 
     public static Combatant getRandomCombatant(ArrayList<Combatant> combatants) {
@@ -69,6 +62,27 @@ public class MiddleEarth {
             System.out.println();
         }
         System.out.println();
+    }
+
+    public static void simBattle(ArrayList<Combatant> combatants) throws Exception {
+        // while there is more than one combatant remaining…
+        Combatant attacker;
+        Combatant defender;
+        while (combatants.size() > 1) {
+            printHealths(combatants);
+
+            attacker = getRandomCombatant(combatants);
+            defender = getDefender(combatants, attacker);
+
+            attacker.attack(defender);
+
+            // after the attack…
+            if (defender.getHealth() <= 0) {
+                System.out.println(attacker.getName() + " has defeated " + defender.getName() + "!");
+                combatants.remove(defender);
+            }
+        }
+        System.out.println(combatants.get(0).getName() + " is the sole survivor on Middle-Earth!");
     }
 
 }
