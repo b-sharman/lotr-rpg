@@ -26,7 +26,10 @@ public class MiddleEarth {
         return combatants.get(random.nextInt(combatants.size()));
     }
 
-    public static Combatant getDefender(ArrayList<Combatant> combatants, Combatant attacker) {
+    public static Combatant getDefender(ArrayList<Combatant> combatants, Combatant attacker) throws Exception {
+        if (combatants.size() <= 1) {
+            throw new Exception("not enough combatants remaining");
+        }
         Combatant defender = attacker;
         while (defender == attacker) {
             defender = getRandomCombatant(combatants);
