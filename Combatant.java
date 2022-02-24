@@ -5,16 +5,18 @@ public abstract class Combatant {
     // maximum value for probabilities
     private static final int POINT_SCALE = 100;
     // length of time it takes to resolve an attack, in ms
-    private static final int FIGHT_TIME = 1;
+    private static final int FIGHT_TIME = 0;
     // length of time between attacks, in ms
-    private static final int PEACE_TIME = 1;
+    private static final int PEACE_TIME = 0;
 
     private String name;
     private int health;
+    private int numWins; // number of battle sims won
 
     public Combatant(String name, int health) {
         this.name = name;
         this.health = health;
+        numWins = 0;
     }
 
     public abstract void speak();
@@ -46,13 +48,15 @@ public abstract class Combatant {
 		return msg;
     }
 
-    public void attack(Combatant defender) {
+    public void attack(Combatant defender, boolean verbose) {
         // create a new Random object
         Random random = new Random();
         // generate a value from 1 to POINT_SCALE, inclusive
         int roll = random.nextInt(POINT_SCALE) + 1;
-        speak();
-        System.out.println(this.name + " is attacking " + defender.getName() + ".");
+        if (verbose) {
+            speak();
+            System.out.println(this.name + " is attacking " + defender.getName() + ".");
+        }
 
         delay(FIGHT_TIME);
 
@@ -100,7 +104,7 @@ public abstract class Combatant {
             damage = 0;
         }
 
-        System.out.println(msg);
+        if (verbose) { System.out.println(msg); }
         // subtract damage from the opponent's health
         defender.health -= damage;
 
@@ -113,6 +117,15 @@ public abstract class Combatant {
 
     public int getHealth() {
         return health;
+    }
+
+    public int getNumWins() {
+        return numWins;
+    }
+
+    // call after the character wins to increase the win counter
+    public void win() {
+        numWins++;
     }
 
 }
