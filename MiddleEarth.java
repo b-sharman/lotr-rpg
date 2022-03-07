@@ -6,9 +6,9 @@ public class MiddleEarth {
     // number of spaces in a tab - change to match environment
     public static final int TAB_LENGTH = 8;
     // number of games to run in a simulation
-    public static final int NUM_GAMES = (int)Math.pow(10, 6);
+    public static final int NUM_GAMES = (int)Math.pow(10, 0);
     // whether to print messages are run a simulation of many games silently
-    public static final boolean VERBOSE = false;
+    public static final boolean VERBOSE = true;
 
     public static void main(String[] args) throws Exception {
         ArrayList<Combatant> characters = new ArrayList<Combatant>();
