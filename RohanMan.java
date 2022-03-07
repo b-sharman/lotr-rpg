@@ -11,6 +11,11 @@ public class RohanMan extends Man {
         super(name, HEALTH);
     }
 
+    public void reset() {
+        // reset health for the next game
+        reset(HEALTH);
+    }
+
     public void speak() {
         System.out.println(getName() + ": I am a man of Rohan!");
     }

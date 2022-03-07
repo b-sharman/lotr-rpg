@@ -20,6 +20,7 @@ public abstract class Combatant {
     }
 
     public abstract void speak();
+    public abstract void reset();
 
     public abstract int getAttackProb();
     public abstract int getDamage();
@@ -34,6 +35,10 @@ public abstract class Combatant {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void reset(int health) {
+        this.health = health;
     }
 
     public String toString() {

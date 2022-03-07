@@ -7,6 +7,8 @@ public class MiddleEarth {
     public static final int TAB_LENGTH = 8;
     // number of games to run in a simulation
     public static final int NUM_GAMES = (int)Math.pow(10, 6);
+    // whether to print messages are run a simulation of many games silently
+    public static final boolean VERBOSE = false;
 
     public static void main(String[] args) throws Exception {
         ArrayList<Combatant> characters = new ArrayList<Combatant>();
@@ -16,13 +18,8 @@ public class MiddleEarth {
         characters.add(new GondorMan("Faramir"));
         characters.add(new RohanMan("Éomer"));
 
-        ArrayList<Combatant> copy = new ArrayList<Combatant>();
         for (int i=0; i<NUM_GAMES; i++) {
-            copy = new ArrayList<Combatant>();
-            for (Combatant c : characters) {
-                copy.add(c);
-            }
-            simBattle(copy, false);
+            simBattle(characters, VERBOSE);
         }
         System.out.println();
         double percentage;
@@ -32,20 +29,38 @@ public class MiddleEarth {
         }
     }
 
+    public static ArrayList<Combatant> getLivingCombatants(ArrayList<Combatant> combatants) {
+        ArrayList<Combatant> ret = new ArrayList<Combatant>();
+        for (Combatant c : combatants) {
+            if (c.getHealth() > 0) {
+                ret.add(c);
+            }
+        }
+        return ret;
+    }
+
     public static Combatant getRandomCombatant(ArrayList<Combatant> combatants) {
         Random random = new Random();
-        return combatants.get(random.nextInt(combatants.size()));
+        // only select living combatants
+        ArrayList<Combatant> livingCombatants = getLivingCombatants(combatants);
+        return livingCombatants.get(random.nextInt(livingCombatants.size()));
     }
 
     public static Combatant getDefender(ArrayList<Combatant> combatants, Combatant attacker) throws Exception {
-        if (combatants.size() <= 1) {
-            throw new Exception("not enough combatants remaining");
+        // store a list of valid defenders - equal to the list of alive combatants,
+        // excluding the attacker
+        ArrayList<Combatant> validDefenders = new ArrayList<Combatant>();
+        for (Combatant c : combatants) {
+            if ((c.getHealth() > 0) && (!c.equals(attacker))) {
+                validDefenders.add(c);
+            }
         }
-        Combatant defender = attacker;
-        while (defender.equals(attacker)) {
-            defender = getRandomCombatant(combatants);
+        if (validDefenders.size() < 1) {
+            throw new Exception("not enough valid combatants remaining");
         }
-        return defender;
+
+        Random random = new Random();
+        return validDefenders.get(random.nextInt(validDefenders.size()));
     }
 
     public static void printHealths(ArrayList<Combatant> combatants) {
@@ -62,6 +77,11 @@ public class MiddleEarth {
 
         // for each Combatant in the List...
         for (Combatant c : combatants) {
+            // don't print dead combatants
+            if (c.getHealth() <= 0) {
+                continue;
+            }
+
             System.out.print(c.getName());
 
             // print enough tabs that all the health bars are aligned
@@ -83,22 +103,26 @@ public class MiddleEarth {
         // while there is more than one combatant remaining…
         Combatant attacker;
         Combatant defender;
-        while (combatants.size() > 1) {
+        while (getLivingCombatants(combatants).size() > 1) {
             if (verbose) { printHealths(combatants); }
 
             attacker = getRandomCombatant(combatants);
             defender = getDefender(combatants, attacker);
 
-            attacker.attack(defender, false);
+            attacker.attack(defender, VERBOSE);
 
             // after the attack…
             if (defender.getHealth() <= 0) {
                 if (verbose) { System.out.println(attacker.getName() + " has defeated " + defender.getName() + "!"); }
-                combatants.remove(defender);
             }
         }
-        if (verbose) {System.out.println(combatants.get(0).getName() + " is the sole survivor on Middle-Earth!"); }
-        combatants.get(0).win(); // increment the combatant's win counter
+        // TODO: move the "sole survivor" print statement to the Combatant.win method
+        if (verbose) {System.out.println(getLivingCombatants(combatants).get(0).getName() + " is the sole survivor on Middle-Earth!"); }
+        getLivingCombatants(combatants).get(0).win(); // increment the combatant's win counter
+        // reset all the combatants' healths for the next round
+        for (Combatant c : combatants) {
+            c.reset();
+        }
     }
 
 }

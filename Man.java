@@ -15,6 +15,11 @@ public class Man extends Combatant {
         super(name, health);
     }
 
+    public void reset() {
+        // reset health for the next game
+        reset(HEALTH);
+    }
+
     public void speak() {
         System.out.println(getName() + ": I am a man!");
     }
